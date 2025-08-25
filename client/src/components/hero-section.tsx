@@ -22,13 +22,13 @@ export default function HeroSection() {
       <div className="max-w-4xl mx-auto relative z-10">
         <h2 
           data-testid="hero-title"
-          className="text-4xl md:text-6xl font-bold text-gray-800 mb-6 leading-tight"
+          className="text-4xl md:text-6xl font-bold text-medical-blue mb-6 leading-tight"
         >
           AI-Powered Skin Analysis
         </h2>
         <p 
           data-testid="hero-description"
-          className="text-lg md:text-xl text-gray-700 mb-8 max-w-2xl mx-auto leading-relaxed"
+          className="text-lg md:text-xl text-blue-600 mb-8 max-w-2xl mx-auto leading-relaxed"
         >
           Upload your photo, let our advanced AI analyze your skin condition, and get instant insights with personalized recommendations.
         </p>
