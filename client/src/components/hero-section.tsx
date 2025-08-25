@@ -1,4 +1,4 @@
-import skinAnalysisBackground from '@assets/generated_images/Skin_analysis_background_15931509.png';
+import aiBackgroundImage from '@assets/WhatsApp Image 2025-08-25 at 17.09.43_d2ec1aaa_1756122004468.jpg';
 
 export default function HeroSection() {
   const scrollToSection = (sectionId: string) => {
@@ -11,7 +11,13 @@ export default function HeroSection() {
     <section 
       id="home" 
       data-testid="hero-section"
-      className="min-h-screen bg-white flex flex-col justify-center items-center text-center px-6 pt-20 relative"
+      className="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-20 relative"
+      style={{
+        backgroundImage: `linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.85) 100%), url(${aiBackgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
     >
       <div className="max-w-4xl mx-auto relative z-10">
         <h2 
