@@ -1,6 +1,6 @@
 import { createServer } from "http";
 import { storage } from "./storage";
-import { insertAnalysisSchema, insertChatMessageSchema } from "@shared/schema";
+import { insertAnalysisSchema, insertChatMessageSchema } from "../shared/schema.js";
 import { analyzeImage, getChatResponse } from "./services/openai";
 import multer from "multer";
 

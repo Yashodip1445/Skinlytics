@@ -1,4 +1,4 @@
-import aiBackgroundImage from '@assets/WhatsApp Image 2025-08-25 at 17.09.43_d2ec1aaa_1756122004468.jpg';
+import aiBackgroundImage from '@assets/generated_images/Skin_analysis_background_15931509.png';
 
 export default function HeroSection() {
   const scrollToSection = (sectionId) => {
