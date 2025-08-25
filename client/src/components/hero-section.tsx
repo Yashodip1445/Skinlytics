@@ -13,7 +13,7 @@ export default function HeroSection() {
       data-testid="hero-section"
       className="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-20 relative"
       style={{
-        backgroundImage: `linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.85) 100%), url(${aiBackgroundImage})`,
+        backgroundImage: `url(${aiBackgroundImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
