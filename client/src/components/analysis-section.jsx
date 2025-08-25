@@ -3,37 +3,21 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 
-interface AnalysisResult {
-  id: string;
-  primaryDetection: string;
-  confidence: string;
-  description: string;
-  observations: Array<{
-    category: string;
-    observation: string;
-    status: 'good' | 'concern' | 'info';
-  }>;
-  recommendations: Array<{
-    icon: string;
-    recommendation: string;
-  }>;
-}
-
 export default function AnalysisSection() {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string>("");
-  const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState("");
+  const [analysisResult, setAnalysisResult] = useState(null);
+  const fileInputRef = useRef(null);
   const { toast } = useToast();
 
   const analysisMutation = useMutation({
-    mutationFn: async (file: File) => {
+    mutationFn: async (file) => {
       const formData = new FormData();
       formData.append('image', file);
       const response = await apiRequest('POST', '/api/analyze', formData);
       return response.json();
     },
-    onSuccess: (result: AnalysisResult) => {
+    onSuccess: (result) => {
       setAnalysisResult(result);
       document.getElementById('analysis-results')?.scrollIntoView({ 
         behavior: 'smooth', 
@@ -49,7 +33,7 @@ export default function AnalysisSection() {
     }
   });
 
-  const handleFileSelect = (file: File) => {
+  const handleFileSelect = (file) => {
     if (file.size > 10 * 1024 * 1024) {
       toast({
         title: "File Too Large",
@@ -65,14 +49,14 @@ export default function AnalysisSection() {
     setAnalysisResult(null);
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
       handleFileSelect(file);
     }
   };
 
-  const handleDrop = (e: React.DragEvent) => {
+  const handleDrop = (e) => {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
     if (file) {
@@ -95,14 +79,14 @@ export default function AnalysisSection() {
     }
   };
 
-  const getConfidenceBadgeClass = (confidence: string) => {
+  const getConfidenceBadgeClass = (confidence) => {
     const percentage = parseInt(confidence);
     if (percentage >= 85) return "bg-green-500 text-white";
     if (percentage >= 70) return "bg-yellow-500 text-white";
     return "bg-blue-500 text-white";
   };
 
-  const getObservationClass = (status: string) => {
+  const getObservationClass = (status) => {
     switch (status) {
       case 'good': return "bg-green-50 border-green-200";
       case 'concern': return "bg-yellow-50 border-yellow-200";
@@ -110,7 +94,7 @@ export default function AnalysisSection() {
     }
   };
 
-  const getObservationIconClass = (status: string) => {
+  const getObservationIconClass = (status) => {
     switch (status) {
       case 'good': return "fas fa-check-circle text-green-600";
       case 'concern': return "fas fa-exclamation-circle text-yellow-600";
@@ -118,7 +102,7 @@ export default function AnalysisSection() {
     }
   };
 
-  const getObservationTextClass = (status: string) => {
+  const getObservationTextClass = (status) => {
     switch (status) {
       case 'good': return "text-green-800";
       case 'concern': return "text-yellow-800";

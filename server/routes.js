@@ -1,5 +1,4 @@
-import type { Express } from "express";
-import { createServer, type Server } from "http";
+import { createServer } from "http";
 import { storage } from "./storage";
 import { insertAnalysisSchema, insertChatMessageSchema } from "@shared/schema";
 import { analyzeImage, getChatResponse } from "./services/openai";
@@ -7,7 +6,7 @@ import multer from "multer";
 
 const upload = multer({ storage: multer.memoryStorage() });
 
-export async function registerRoutes(app: Express): Promise<Server> {
+export async function registerRoutes(app) {
   
   // Analyze uploaded skin image
   app.post("/api/analyze", upload.single('image'), async (req, res) => {

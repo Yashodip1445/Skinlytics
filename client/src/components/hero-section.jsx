@@ -1,7 +1,7 @@
 import aiBackgroundImage from '@assets/WhatsApp Image 2025-08-25 at 17.09.43_d2ec1aaa_1756122004468.jpg';
 
 export default function HeroSection() {
-  const scrollToSection = (sectionId: string) => {
+  const scrollToSection = (sectionId) => {
     document.getElementById(sectionId)?.scrollIntoView({ 
       behavior: 'smooth' 
     });

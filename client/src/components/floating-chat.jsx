@@ -3,16 +3,9 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 
-interface ChatMessage {
-  id: string;
-  message: string;
-  response: string;
-  isUser?: boolean;
-}
-
 export default function FloatingChat() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>([
+  const [messages, setMessages] = useState([
     {
       id: '1',
       message: 'Welcome!',
@@ -27,7 +20,7 @@ export default function FloatingChat() {
   const sessionId = 'session_' + Date.now();
 
   const chatMutation = useMutation({
-    mutationFn: async (message: string) => {
+    mutationFn: async (message) => {
       const response = await apiRequest('POST', '/api/chat', {
         message,
         sessionId
@@ -55,7 +48,7 @@ export default function FloatingChat() {
     if (inputMessage.trim() === '') return;
 
     // Add user message
-    const userMessage: ChatMessage = {
+    const userMessage = {
       id: Date.now().toString(),
       message: inputMessage,
       response: '',
@@ -67,7 +60,7 @@ export default function FloatingChat() {
     setInputMessage('');
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyPress = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       sendMessage();

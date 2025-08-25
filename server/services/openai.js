@@ -4,22 +4,7 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || process.env.VITE_OPENAI_API_KEY || "your-openai-api-key"
 });
 
-interface SkinAnalysisResult {
-  primaryDetection: string;
-  confidence: string;
-  description: string;
-  observations: Array<{
-    category: string;
-    observation: string;
-    status: 'good' | 'concern' | 'info';
-  }>;
-  recommendations: Array<{
-    icon: string;
-    recommendation: string;
-  }>;
-}
-
-export async function analyzeImage(base64Image: string): Promise<SkinAnalysisResult> {
+export async function analyzeImage(base64Image) {
   try {
     const response = await openai.chat.completions.create({
       model: "gpt-5", // the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user
@@ -78,7 +63,7 @@ export async function analyzeImage(base64Image: string): Promise<SkinAnalysisRes
         {
           category: "General Assessment",
           observation: "Analysis completed successfully",
-          status: "info" as const
+          status: "info"
         }
       ],
       recommendations: result.recommendations || [
@@ -94,7 +79,7 @@ export async function analyzeImage(base64Image: string): Promise<SkinAnalysisRes
   }
 }
 
-export async function getChatResponse(message: string): Promise<string> {
+export async function getChatResponse(message) {
   try {
     const response = await openai.chat.completions.create({
       model: "gpt-5", // the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user
