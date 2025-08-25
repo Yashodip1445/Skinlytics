@@ -11,13 +11,7 @@ export default function HeroSection() {
     <section 
       id="home" 
       data-testid="hero-section"
-      className="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-20 relative"
-      style={{
-        backgroundImage: `linear-gradient(135deg, rgba(255, 236, 210, 0.9) 0%, rgba(252, 182, 159, 0.9) 100%), url(${skinAnalysisBackground})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
+      className="min-h-screen bg-white flex flex-col justify-center items-center text-center px-6 pt-20 relative"
     >
       <div className="max-w-4xl mx-auto relative z-10">
         <h2 
