@@ -77,13 +77,22 @@ export default function NavigationHeader() {
             </li>
           </ul>
         </nav>
-        <button 
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          data-testid="mobile-menu-button"
-          className="md:hidden text-gray-700 hover:text-medical-blue"
-        >
-          <i className="fas fa-bars text-xl"></i>
-        </button>
+        <div className="flex items-center gap-4">
+          <button 
+            data-testid="sign-in-button"
+            className="bg-gradient-to-r from-medical-blue to-light-blue text-white px-4 py-2 rounded-full font-medium hover:scale-105 transition-all duration-300 flex items-center gap-2"
+          >
+            <i className="fas fa-user"></i>
+            <span className="hidden sm:inline">Sign In</span>
+          </button>
+          <button 
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            data-testid="mobile-menu-button"
+            className="md:hidden text-gray-700 hover:text-medical-blue"
+          >
+            <i className="fas fa-bars text-xl"></i>
+          </button>
+        </div>
       </header>
 
       {/* Mobile Menu */}
