@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 
 export default function FloatingChat() {
@@ -19,14 +18,24 @@ export default function FloatingChat() {
   // Generate a simple session ID
   const sessionId = 'session_' + Date.now();
 
+  const mockChatResponse = async (message) => {
+    await new Promise((r) => setTimeout(r, 700));
+
+    const lower = message.toLowerCase();
+    if (lower.includes("dry") || lower.includes("dehydr")) {
+      return { response: "Consider a hydrating routine: gentle cleanser, hyaluronic acid, and a ceramide moisturizer. SPF daily." };
+    }
+    if (lower.includes("oily") || lower.includes("acne")) {
+      return { response: "Try salicylic acid 0.5–2% and a non‑comedogenic moisturizer. Introduce niacinamide and use SPF." };
+    }
+    if (lower.includes("red") || lower.includes("irrit")) {
+      return { response: "Look for soothing ingredients like panthenol and centella. Avoid fragrance and patch test." };
+    }
+    return { response: "Great question! Keep a simple routine: cleanse, treat, moisturize, and protect with SPF. Consistency is key." };
+  };
+
   const chatMutation = useMutation({
-    mutationFn: async (message) => {
-      const response = await apiRequest('POST', '/api/chat', {
-        message,
-        sessionId
-      });
-      return response.json();
-    },
+    mutationFn: async (message) => mockChatResponse(message),
     onSuccess: (data, message) => {
       setMessages(prev => [...prev, {
         id: Date.now().toString(),

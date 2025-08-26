@@ -1,4 +1,4 @@
-# replit.md
+# Yasho.md
 
 ## Overview
 
@@ -11,7 +11,7 @@ Preferred communication style: Simple, everyday language.
 ## System Architecture
 
 ### Frontend Architecture
-- **Framework**: React 18 with TypeScript for type safety and modern development
+- **Framework**: React 18 with modern development
 - **Routing**: Wouter for lightweight client-side routing
 - **UI Components**: shadcn/ui component library built on Radix UI primitives for accessibility and consistency
 - **Styling**: Tailwind CSS with custom design tokens and CSS variables for theming

@@ -1,6 +1,5 @@
 import { useState, useRef } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 
 export default function AnalysisSection() {
@@ -10,13 +9,68 @@ export default function AnalysisSection() {
   const fileInputRef = useRef(null);
   const { toast } = useToast();
 
+  // Simple client-side mock analysis (no backend)
+  const mockAnalyzeImage = async (file) => {
+    // Simulate latency
+    await new Promise((r) => setTimeout(r, 900));
+
+    // Naive heuristic using file size to vary output deterministically
+    const size = file?.size || 0;
+    const confidenceNumber = 65 + ((size % 35));
+    const confidence = `${Math.min(confidenceNumber, 99)}%`;
+
+    const primaryOptions = [
+      "Healthy Skin",
+      "Mild Dryness",
+      "Oiliness in T-zone",
+      "Uneven Texture",
+      "Minor Redness",
+    ];
+    const primaryDetection = primaryOptions[size % primaryOptions.length];
+
+    const observations = [
+      {
+        category: "Hydration",
+        observation: size % 2 === 0
+          ? "Skin appears adequately hydrated in most regions."
+          : "Slight dehydration signs on cheeks and around the mouth.",
+        status: size % 2 === 0 ? "good" : "concern",
+      },
+      {
+        category: "Sebum",
+        observation: size % 3 === 0
+          ? "Balanced sebum levels across forehead and nose."
+          : "Increased oiliness observed in the T‑zone.",
+        status: size % 3 === 0 ? "good" : "info",
+      },
+    ];
+
+    const recommendations = [
+      {
+        icon: "fas fa-tint",
+        recommendation: "Use a gentle hydrating cleanser morning and night.",
+      },
+      {
+        icon: "fas fa-sun",
+        recommendation: "Apply broad‑spectrum SPF 30+ daily.",
+      },
+      {
+        icon: "fas fa-leaf",
+        recommendation: "Incorporate a lightweight moisturizer with ceramides.",
+      },
+    ];
+
+    return {
+      primaryDetection,
+      confidence,
+      description: "Client‑side demo analysis for preview purposes only.",
+      observations,
+      recommendations,
+    };
+  };
+
   const analysisMutation = useMutation({
-    mutationFn: async (file) => {
-      const formData = new FormData();
-      formData.append('image', file);
-      const response = await apiRequest('POST', '/api/analyze', formData);
-      return response.json();
-    },
+    mutationFn: async (file) => mockAnalyzeImage(file),
     onSuccess: (result) => {
       setAnalysisResult(result);
       document.getElementById('analysis-results')?.scrollIntoView({ 

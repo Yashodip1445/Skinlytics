@@ -1,5 +1,3 @@
-import aiBackgroundImage from '@assets/generated_images/Skin_analysis_background_15931509.png';
-
 export default function HeroSection() {
   const scrollToSection = (sectionId) => {
     document.getElementById(sectionId)?.scrollIntoView({ 
@@ -11,13 +9,7 @@ export default function HeroSection() {
     <section 
       id="home" 
       data-testid="hero-section"
-      className="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-20 relative"
-      style={{
-        backgroundImage: `url(${aiBackgroundImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
+      className="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-20 relative bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900"
     >
       <div className="max-w-4xl mx-auto relative z-10">
         <h2 
